@@ -8,7 +8,6 @@ struct pixcel{
     unsigned char green;
     unsigned char red;
 };
-int load(const char* path,struct pixcel*** pixcels_);
 #pragma pack(push,1)
 struct bmp_header {
 
@@ -30,5 +29,6 @@ struct bmp_header {
   uint32_t essentail_num;
 };
 #pragma pack(pop)
+int load(const char* path,struct pixcel*** pixcels_,struct bmp_header *header_);
 
 #endif

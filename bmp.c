@@ -1,7 +1,7 @@
 #include "bmp.h"
 #include <stdio.h>
 #include <stdlib.h>
-int load(const char* path,struct pixcel*** pixcels_){
+int load(const char* path,struct pixcel*** pixcels_,struct bmp_header* header_){
 	
 	FILE*file=fopen(path, "rb");
 	struct bmp_header header;
@@ -33,6 +33,7 @@ int load(const char* path,struct pixcel*** pixcels_){
 	}
 	fclose(file);
 	*pixcels_=pixcels;
+	*header_=header;
 	return 0;
 
 }
