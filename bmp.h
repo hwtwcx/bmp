@@ -31,6 +31,6 @@ struct bmp_header {
 #pragma pack(pop)
 int load(const char* path,struct pixcel*** pixcels_,struct bmp_header *header_);
 int process(struct pixcel*** pixcels_,int mode);
-int free_pixcels(struct pixcel *** pixcels_);
+int free_pixcels(struct pixcel *** pixcels_,int height);
 
 #endif

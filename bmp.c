@@ -37,6 +37,11 @@ int load(const char* path,struct pixcel*** pixcels_,struct bmp_header* header_){
 	return 0;
 
 }
-
-	
+int free_pixcels(struct pixcel ***pixcels_,int height){
+	for (int i=0;i<height; i++) {
+		free(*pixcels_[i]);
+	}
+	free(*pixcels_);
+	return 0;
+}	
 
