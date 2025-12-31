@@ -23,7 +23,7 @@ int load(const char* path,struct pixcel*** pixcels_,struct bmp_header* header_){
 	struct pixcel**pixcels;
 	pixcels=(struct pixcel**)malloc(header.height*sizeof(struct pixcel*));
 	for (int _=0; _<header.height; _++) {
-		pixcels[_]=(struct pixcel*)malloc(header.width*sizeof(struct pixcel));
+		pixcels[_]=(struct pixcel*)malloc(rowSize*sizeof(struct pixcel));
 
 	}
 	for (int i=header.height-1; i>=0; i--) {
