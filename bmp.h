@@ -29,7 +29,7 @@ struct bmp_header {
   uint32_t essentail_num;
 };
 #pragma pack(pop)
-int load(const char* path,struct pixcel*** pixcels_,struct bmp_header *header_);
+int load(const char* path,struct pixcel*** pixcels_,struct bmp_header *header_,int *rowsize);
 int process(struct pixcel*** pixcels_,int mode);
 int free_pixcels(struct pixcel *** pixcels_,int height);
 

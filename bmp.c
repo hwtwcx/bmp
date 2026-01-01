@@ -1,7 +1,7 @@
 #include "bmp.h"
 #include <stdio.h>
 #include <stdlib.h>
-int load(const char* path,struct pixcel*** pixcels_,struct bmp_header* header_){
+int load(const char* path,struct pixcel*** pixcels_,struct bmp_header* header_,int *rowsize){
 	
 	FILE*file=fopen(path, "rb");
 	struct bmp_header header;
@@ -23,17 +23,19 @@ int load(const char* path,struct pixcel*** pixcels_,struct bmp_header* header_){
 	struct pixcel**pixcels;
 	pixcels=(struct pixcel**)malloc(header.height*sizeof(struct pixcel*));
 	for (int _=0; _<header.height; _++) {
-		pixcels[_]=(struct pixcel*)malloc(rowSize*sizeof(struct pixcel));
+		pixcels[_]=(struct pixcel*)malloc(header.width*sizeof(struct pixcel));
 
 	}
 	for (int i=header.height-1; i>=0; i--) {
 		fread(pixcels[i], sizeof(struct pixcel), header.width, file);
-		fseek(file,rowSize-header.height*3,SEEK_CUR);
+		fseek(file,header.width-rowSize,SEEK_CUR);
 	
 	}
+	
 	fclose(file);
 	*pixcels_=pixcels;
 	*header_=header;
+	*rowsize=rowSize;
 	return 0;
 
 }
