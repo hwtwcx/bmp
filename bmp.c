@@ -28,7 +28,7 @@ int load(const char* path,struct pixcel*** pixcels_,struct bmp_header* header_,i
 	}
 	for (int i=header.height-1; i>=0; i--) {
 		fread(pixcels[i], sizeof(struct pixcel), header.width, file);
-		fseek(file,header.width-rowSize,SEEK_CUR);
+		fseek(file,rowSize-header.width,SEEK_CUR);
 	
 	}
 	
