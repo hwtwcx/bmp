@@ -18,8 +18,10 @@ int load(const char* path,struct pixcel*** pixcels_,struct bmp_header* header_,i
 		printf("dont support to zip");
 	}
 	printf("file_size:%d\n",header.file_size);
-	int rowSize=((header.width*3+3)/4)*4;
-	fseek(file,header.offset_size, SEEK_SET);
+	int rowSize=(((header.width*header.color_bit)/8+3)/4)*4;
+	printf("%d\n",header.offset_size);
+	fseek(file,header.offset_size, SEEK_CUR);
+	
 	struct pixcel**pixcels;
 	pixcels=(struct pixcel**)malloc(header.height*sizeof(struct pixcel*));
 	for (int _=0; _<header.height; _++) {
@@ -40,10 +42,11 @@ int load(const char* path,struct pixcel*** pixcels_,struct bmp_header* header_,i
 
 }
 int free_pixcels(struct pixcel ***pixcels_,int height){
+	struct pixcel**__=*pixcels_;
 	for (int i=0;i<height; i++) {
-		free(*pixcels_[i]);
+		free(__[i]);
 	}
-	free(*pixcels_);
+	free(__);
 	return 0;
-}	
+}
 

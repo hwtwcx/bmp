@@ -7,6 +7,7 @@ struct pixcel{
     unsigned char blue;
     unsigned char green;
     unsigned char red;
+	unsigned char unuse;
 };
 #pragma pack(push,1)
 struct bmp_header {
