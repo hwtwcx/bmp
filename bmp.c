@@ -24,7 +24,7 @@ int load(const char* path,char** pixcels_,struct bmp_header* header_,int *rowsiz
 		
 	char *pixcels=(char*)malloc(rowSize*header.height);
 	for (int i=0; i<rowSize*header.height; i++) {
-		fread((char*)pixcels[i], sizeof(char), 1, file);	
+		fread(&pixcels[i], sizeof(char), 1, file);	
 	}
 	fclose(file);
 	*pixcels_=pixcels;
