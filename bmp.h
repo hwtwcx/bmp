@@ -3,12 +3,7 @@
 
 #include <stdint.h>
 #include <stdlib.h>
-struct pixcel{
-    unsigned char blue;
-    unsigned char green;
-    unsigned char red;
-	unsigned char unuse;
-};
+
 #pragma pack(push,1)
 struct bmp_header {
 
@@ -30,8 +25,8 @@ struct bmp_header {
   uint32_t essentail_num;
 };
 #pragma pack(pop)
-int load(const char* path,struct pixcel*** pixcels_,struct bmp_header *header_,int *rowsize);
-int process(struct pixcel*** pixcels_,int mode);
-int free_pixcels(struct pixcel *** pixcels_,int height);
+int load(const char* path,char**pixcel,struct bmp_header *header_,int *rowsize);
+int process(char*pixcel,int mode);
+int free_pixcels(char** pixcel,int height);
 
 #endif

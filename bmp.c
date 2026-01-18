@@ -1,7 +1,7 @@
 #include "bmp.h"
 #include <stdio.h>
 #include <stdlib.h>
-int load(const char* path,struct pixcel*** pixcels_,struct bmp_header* header_,int *rowsize){
+int load(const char* path,char** pixcels_,struct bmp_header* header_,int *rowsize){
 	
 	FILE*file=fopen(path, "rb");
 	struct bmp_header header;
@@ -20,20 +20,12 @@ int load(const char* path,struct pixcel*** pixcels_,struct bmp_header* header_,i
 	printf("file_size:%d\n",header.file_size);
 	int rowSize=(((header.width*header.color_bit)/8+3)/4)*4;
 	printf("%d\n",header.offset_size);
-	fseek(file,header.offset_size, SEEK_CUR);
-	
-	struct pixcel**pixcels;
-	pixcels=(struct pixcel**)malloc(header.height*sizeof(struct pixcel*));
-	for (int _=0; _<header.height; _++) {
-		pixcels[_]=(struct pixcel*)malloc(header.width*sizeof(struct pixcel));
-
+	fseek(file,header.offset_size, SEEK_SET);
+		
+	char *pixcels=(char*)malloc(rowSize*header.height);
+	for (int i=0; i<rowSize*header.height; i++) {
+		fread((char*)pixcels[i], sizeof(char), 1, file);	
 	}
-	for (int i=header.height-1; i>=0; i--) {
-		fread(pixcels[i], sizeof(struct pixcel), header.width, file);
-		fseek(file,rowSize-header.width,SEEK_CUR);
-	
-	}
-	
 	fclose(file);
 	*pixcels_=pixcels;
 	*header_=header;
@@ -41,11 +33,8 @@ int load(const char* path,struct pixcel*** pixcels_,struct bmp_header* header_,i
 	return 0;
 
 }
-int free_pixcels(struct pixcel ***pixcels_,int height){
-	struct pixcel**__=*pixcels_;
-	for (int i=0;i<height; i++) {
-		free(__[i]);
-	}
+int free_pixcels(char **pixcels_,int height){
+	char* __=*pixcels_;
 	free(__);
 	return 0;
 }
