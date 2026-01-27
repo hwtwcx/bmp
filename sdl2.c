@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
         
         // 更新屏幕
     SDL_RenderPresent(renderer);
-	free_pixcels(&pixcels,header.height);
+	free_pixcels(&pixcels,);
 	while (1) {
 		SDL_PollEvent(&event);
 		if (event.type==SDL_QUIT) {
