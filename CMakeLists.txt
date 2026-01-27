@@ -8,7 +8,7 @@ if(DEFINED ENV{bmp_env})
 else()
 	find_package(SDL2 REQUIRED)
 	
-	add_executable(bmp-process-c sdl2.c bmp.c)
+	add_executable(bmp-process-c  bmp.c)
 	target_link_libraries(${PROJECT_NAME} PRIVATE
     SDL2::SDL2
 	)

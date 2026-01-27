@@ -3,7 +3,12 @@
 
 #include <stdint.h>
 #include <stdlib.h>
+typedef struct RGB_revered{
+unsigned char blue;
+unsigned char green;
+unsigned char red;
 
+}RGB_revered;
 #pragma pack(push,1)
 struct bmp_header {
 
@@ -27,6 +32,6 @@ struct bmp_header {
 #pragma pack(pop)
 int load(const char* path,char**pixcel,struct bmp_header *header_,int *rowsize);
 int process(char*pixcel,int mode);
-int free_pixcels(char** pixcel,int height);
+int free_pixcels(char** pixcel);
 
 #endif

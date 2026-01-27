@@ -8,20 +8,12 @@
 #include "bmp.h"
 int main(int argc, char *argv[])
 {
-	struct pixcel** pixcels;
+	 char* pixcels;
 	struct bmp_header header;
 	int rowsize;
 	SDL_Event event;
 	load("/home/hwt/out.bmp", &pixcels, &header,&rowsize);
-	printf("%d",pixcels[0][0].red);
-	printf("%d",pixcels[0][0].green);
-	printf("%d",pixcels[0][0].blue);
-	printf("%d",pixcels[1][0].blue);
-	printf("%d",pixcels[0][0].red);
-	printf("%d",pixcels[0][0].green);
-	printf("%d",pixcels[0][0].blue);
-	printf("%d",pixcels[1][1].green);
-	printf("%d",pixcels[1][1].blue);
+
 	SDL_Window* window=SDL_CreateWindow("test pixcels", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, header.width, header.height, SDL_WINDOW_SHOWN);
 	
 	SDL_Renderer* renderer=SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
@@ -39,8 +31,8 @@ int main(int argc, char *argv[])
 	Uint32* pixcels_=(Uint32*)_;
 	for (int y; y<header.height; y++) {
 		for (int x; x<header.width; x++) {
-			struct pixcel __=pixcels[y][x];
-			pixcels_[y * (pitch / 4) + x]=SDL_MapRGBA(____, __.red, __.green, __.blue,225);
+			
+			pixcels_[y * (pitch / 4) + x]=SDL_MapRGBA(____, pixcels[y*rowsize+x].red, .green, __.blue,225);
 		}
 	}
 	SDL_UnlockTexture(texture);/*end*/
