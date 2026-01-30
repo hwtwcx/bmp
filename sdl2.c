@@ -31,8 +31,8 @@ int main(int argc, char *argv[])
 	Uint32* pixcels_=(Uint32*)_;
 	for (int y; y<header.height; y++) {
 		for (int x; x<header.width; x++) {
-			
-			pixcels_[y * (pitch / 4) + x]=SDL_MapRGBA(____, pixcels[y*rowsize+x].red, .green, __.blue,225);
+			RGB_revered *______=(RGB_revered *)pixcels+y*rowsize+x;	
+			pixcels_[y * (pitch / 4) + x]=SDL_MapRGBA(____, ______->red, ______->green, ______->blue,225);
 		}
 	}
 	SDL_UnlockTexture(texture);/*end*/
@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
         
         // 更新屏幕
     SDL_RenderPresent(renderer);
-	free_pixcels(&pixcels,);
+	free_pixcels(&pixcels);
 	while (1) {
 		SDL_PollEvent(&event);
 		if (event.type==SDL_QUIT) {

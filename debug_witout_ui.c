@@ -1,8 +1,6 @@
 #include "bmp.h"
 #include <stdio.h>
 
-#include <stdio.h>
-
 int main(int argc, char *argv[])
 {
 	char *pixcel;
@@ -27,5 +25,7 @@ int main(int argc, char *argv[])
 	printf("vertical_pixel:%d\n",header_.vertical_pixel);
 	printf("color_num:%d\n",header_.color_num);
 	printf("essentail_num:%d\n",header_.essentail_num);
+	
+	free_pixcels(&pixcel);
 	return 1;
 }
